@@ -1,0 +1,78 @@
+{% extends 'seller_index_.html' %}
+{% block content %}
+    {% load crispy_forms_filters %}
+
+
+    <main id="main" class="main">
+        <div class="card mb-3 pt-8 pb-3">
+
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="pagetitle">
+                        <h1 style="text-align : center; font-family: KacstDigital;"> Add the products !! </h1><br>
+{##}
+{#                                                <select name="product_collection" class="card mb-3 pt-8 pb-3 w-100 ">#}
+{#                                                    <option>-----Select Product_Collection-----</option>#}
+{#                                                    <option value="men">Men</option>#}
+{#                                                    <option value="=women">Women</option>#}
+{#                                                </select> <br>#}
+{##}
+{#                                                <select name="Product_category" class="card mb-3 pt-8 pb-3  w-100 ">#}
+{#                                                    <option>-----Select Product_Category-----</option>#}
+{#                                                    <option value="jeans">Jeans</option>#}
+{#                                                    <option value="=shirt">Shirt</option>#}
+{#                                                </select><br>#}
+{##}
+{#                                                <select name="product_size" class="card mb-3 pt-8 pb-3 w-100 ">#}
+{#                                                    <option>-----Select Product_Size-----</option>#}
+{#                                                    <option value="m">M</option>#}
+{#                                                    <option value="l">L</option>#}
+{#                                                </select><br>#}
+{##}
+{#                                                <select name="product_color" class="card mb-3 pt-8 pb-3 w-100 ">#}
+{#                                                    <option>-----Select Product_Color-----</option>#}
+{#                                                    <option value="red">Red</option>#}
+{#                                                    <option value="black">Black</option>#}
+{#                                                    <option value="blue">Blue</option>#}
+{#                                                </select> <br><br>#}
+{#                                                <div class="card mb-3 pt-8 pb-3 w-100 ">#}
+{#                                                    <label>Product_Price : </label>#}
+{#                                                    <input type="text" name="product_price">#}
+{#                                                </div>#}
+{#                                                <div class="card mb-3 pt-8 pb-3 w-100 ">#}
+{#                                                    <label>Product_Image : </label>#}
+{#                                                    <input type="File" name="product_price">#}
+{#                                                </div>#}
+{##}
+{#                                                <div class="card mb-3 pt-8 pb-3 w-100 ">#}
+{#                                                    <label>Product_Description : </label>#}
+{#                                                    <textarea name="product_description"> </textarea>#}
+{#                                                </div>#}
+{##}
+{#                                                <div class="col-12 mt-4">#}
+{#                                                    <button class="btn btn-primary w-100" type="submit">Add Product</button>#}
+{#                                                </div>#}
+{##}
+{#                                            </div>#}
+{#                        {{ form.product_seller | as_crispy_field }}#}
+{#                        {{ form.product_collection | as_crispy_field }}#}
+{#                        {{ form.Product_category | as_crispy_field }}#}
+{#                        {{ form.product_size | as_crispy_field }}#}
+{#                        {{ form.product_color | as_crispy_field }}#}
+{#                        {{ form.product_price | as_crispy_field }}#}
+{#                        {{ form.product_description | as_crispy_field }}#}
+{#                        {{ form.product_image | as_crispy_field }}#}
+                        {{ form | crispy }}
+                        <div class="col-12 mt-4">
+                            <button class="btn btn-primary w-100" type="submit">Add Product</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

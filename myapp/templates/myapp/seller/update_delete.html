@@ -1,0 +1,12 @@
+
+
+
+{#This is edit and delete button for View product table ------------------------------#}
+
+
+<a class="badge bg-primary" href="{% url 'product_update' pk=record.id %}">Edit</a>
+
+<a  class="badge bg-danger" href="{% url 'p_delete' pk=record.id %}">Delete </a>
+
+
+

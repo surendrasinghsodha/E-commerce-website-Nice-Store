@@ -1,0 +1,93 @@
+<aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-link " href="{% url 'index' %}">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+        {% if request.user.usercreate.usertype == 'user' %}
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'shop:product_view' %}">
+                    <i class="bi bi-grid-3x3-gap-fill"></i>
+                    <span>Shop</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                {#   cart_set <---- all data in user goes into cart_set  --->   FORMSET  CART  <---#}
+                {% if request.user.usercreate.cart_set.first.id %}
+                    <a class="nav-link collapsed"
+                       href="{% url 'shop:cart_update' request.user.usercreate.cart_set.first.id %}">
+                        <i class="bi bi-cart-plus-fill"></i>
+                        <span>Cart</span>
+                        <span class="badge bg-success badge-number">{{ total_items }}</span>
+                    </a>
+                {% else %}
+                    <a class="nav-link collapsed"
+                       href="#">
+                        <i class="bi bi-cart-plus-fill"></i>
+                        <span>Cart</span>
+                        <span class="badge bg-success badge-number">0</span>
+                    </a>
+                {% endif %}
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'shop:wishlist' %}">
+                    <i class="bi bi-heart-fill"></i>
+                    <span>Wishlist</span>
+                    <span class="badge bg-primary badge-number">{{ wishlist_count }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'shop:order' %}">
+                    <i class="bi bi-heart-fill"></i>
+                    <span>Order</span>
+
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'product_rating' %}">
+                    <i class="bi bi-person"></i>
+                    <span>Rating</span>
+                </a>
+            </li>
+        {% else %}
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'view_product' %}">
+                    <i class="bi bi-image-alt"></i>
+                    <span>View Product</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'category' %}">
+                    <i class="bi bi-plus-square-fill"></i>
+                    <span>SET-UP-Category</span>
+                </a>
+            </li>
+
+            {#            <li class="nav-item">#}
+            {#                <a class="nav-link collapsed" href="#">#}
+            {#                    <i class="bi bi-plus-square-fill"></i>#}
+            {#                    <span>SET-UP-Collection</span>#}
+            {#                </a>#}
+            {#            </li>#}
+            {#            <li class="nav-item">#}
+            {#                <a class="nav-link collapsed" href="#">#}
+            {#                    <i class="bi bi-plus-square-fill"></i>#}
+            {#                    <span>SET-UP-Size</span>#}
+            {#                </a>#}
+            {#            </li>#}
+            {##}
+            {#            <li class="nav-item">#}
+            {#                <a class="nav-link collapsed" href="#">#}
+            {#                    <i class="bi bi-plus-square-fill"></i>#}
+            {#                    <span>SET-UP-color</span>#}
+            {#                </a>#}
+            {#            </li>#}
+
+        {% endif %}
+    </ul>
+</aside><!-- End Sidebar-->

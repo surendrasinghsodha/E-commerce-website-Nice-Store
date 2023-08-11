@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% block content %}
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1 style="text-align : center; font-family: KacstDigital;"> Your Wish-List </h1>
+        </div>
+        {% for mess in messages %}
+            <p style="font-weight: bold; text-align: center">{{ mess }}</p>
+        {% endfor %}
+
+
+        <section class="section">
+
+            {% for i in object_list %}
+                <div class="card">
+                    <div class="card-body" style=" margin-left:20px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                {#  --------- here i use i.**product**.product_image bcz in the whislist *product*= Foreignkey(Product--)#}
+                                <img src="{{ i.product.product_image.url }}" class="img-fluid rounded-start mt-4"
+                                     alt="..."
+                                     style="width:300px; height:330px; "
+                                >
+                            </div>
+                            <div class="col-md-8 mt-4">
+                                <div style=" margin-left:80px;">
+                                    <p>Collection : {{ i.product.product_collection }}</p>
+                                    <p>Price : {{ i.product.product_price }}</p>
+                                    <p>Category : {{ i.product.product_category }}</p>
+                                    <p>Description : {{ i.product.product_description }}</p>
+                                    <p>Size : {{ i.product.product_size }}</p>
+                                    <p>Color : {{ i.product.product_color }}</p>
+
+
+{#                                        <form method="post" action="{% url 'shop:remove_from_cart' cart_object.id %}">#}
+{#                                            {% csrf_token %}#}
+{#                                            <button type="submit" class="btn btn-danger mb-2"><span#}
+{#                                                    class="badge bg-white text-danger "></span>Remove From Cart#}
+{##}
+{#                                            </button>#}
+{#                                        </form>#}
+
+                                        <form method="post" action="{% url 'shop:add_to_cart' i.product.pk %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-info mb-2">
+                                                Add To Cart <span class="badgbadgee bg-white text-info"></span>
+                                            </button>
+                                        </form>
+
+
+
+                                    <form method="post" action="{% url 'shop:remove_item' i.pk %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger mb-2"><span
+                                                class="badge bg-white text-danger "></span>Remove From Wishlist
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+
+        </section>
+    </main>
+
+
+{% endblock %}

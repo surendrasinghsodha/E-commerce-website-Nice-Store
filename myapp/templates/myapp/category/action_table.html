@@ -1,0 +1,15 @@
+
+{#in this html file we use edit and delete#}
+{#in the Category table use data show what category he Add+#}
+{#and to update and delete that catgory i use UpdateView and DeleteView and here put link #}
+
+{#************in django table data comes in record form to print {{ {{ record.id }} }} ***********#}
+
+
+<a class="badge bg-primary" href="{% url 'category_update' pk=record.id %}"> Edit </a>
+
+<a class="badge bg-danger" href="{% url 'category_delete' pk=record.id %}">Delete </a>
+
+
+
+

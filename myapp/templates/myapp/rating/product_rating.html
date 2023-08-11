@@ -1,0 +1,23 @@
+{% extends 'seller_index_.html' %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+
+        <h1 style="text-align : center; font-family: KacstDigital;"> Product Rating !! </h1><br>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.ratings | as_crispy_field }}{#             {% crispy form %}#}
+            {{ form.comments | as_crispy_field }}{#             {% crispy form %}#}
+
+        <button class="btn btn-primary w-50 mt-2 " type="submit">Submit</button>
+        </form>
+
+
+    </main>
+
+{% endblock %}

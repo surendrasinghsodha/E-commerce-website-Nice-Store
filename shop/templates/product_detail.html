@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+    <main id="main" class="main">
+
+        <div class="card mb-3">
+
+            {% for message in messages %}
+                <p style="font-weight: bold; text-align: center">{{ message }}</p>
+            {% endfor %}
+
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ userdata.product_image.url }}" class="img-fluid rounded-start mt-4 mb-4" alt="..."
+                         style="width:500px; height:500px; "
+                    >
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body" style="margin-left:100px; margin-top: 10px;">
+                        <h6 class="card-title">Collection : {{ userdata.product_collection }}</h6>
+                        <h6 class="card-title">Price : {{ userdata.product_price }}</h6>
+                        <h6 class="card-title">Category : {{ userdata.product_category }}</h6>
+                        <h6 class="card-title">Description : {{ userdata.product_description }}</h6>
+                        <h6 class="card-title">Size : {{ userdata.product_size }}</h6>
+                        <h6 class="card-title">Color : {{ userdata.product_color }}</h6>
+                    </div>
+
+
+                    <div style="margin-left:120px">
+                        {% if cart_obj %}
+
+                            <form method="post" action="{% url 'shop:remove_from_cart' cart_obj.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger mb-2"><span
+                                        class="badge bg-white text-danger "></span>Remove From Cart
+
+                                </button>
+                            </form>
+
+                        {% else %}
+
+                            <form method="post" action="{% url 'shop:add_to_cart' userdata.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-info mb-2">
+                                    Add To Cart <span class="badgbadgee bg-white text-info"></span>
+                                </button>
+                            </form>
+
+                        {% endif %}
+
+                        {% if wishlist_obj %}
+
+                            <form method="post" action="{% url 'shop:remove_item' wishlist_obj.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger mb-2"><span
+                                        class="badge bg-white text-danger "></span>Remove From Wishlist
+
+                                </button>
+                            </form>
+
+                        {% else %}
+
+                            <form method="post" action="{% url 'shop:add_to_wishlist' userdata.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-warning mb-2">
+                                    Add To Wishlist <span class="badge bg-white text-warning"></span>
+                                </button>
+                            </form>
+
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

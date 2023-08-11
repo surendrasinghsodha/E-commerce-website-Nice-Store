@@ -1,0 +1,27 @@
+{% extends 'seller_index_.html' %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+
+            <h1 style="text-align : center; font-family: KacstDigital;"> Update Your Product !! </h1><br>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.product_collection | as_crispy_field }}
+            {{ form.product_category | as_crispy_field }}
+            {{ form.product_size | as_crispy_field }}
+            {{ form.product_color | as_crispy_field }}
+            {{ form.product_price | as_crispy_field }}
+            {{ form.product_description | as_crispy_field }}
+            {{ form.product_image | as_crispy_field }}
+
+            <button class="btn btn-primary w-100 mt-4 " type="submit">Submit</button>
+        </form>
+
+
+    </main>
+
+{% endblock %}

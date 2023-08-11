@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block content %}
+    <main id="main" class="main" xmlns="http://www.w3.org/1999/html">
+
+        {% for message in messages %}
+            <p style="font-weight: bold; text-align: center">{{ message }}</p>
+        {% endfor %}
+
+        <section class="section profile">
+            <div class="row">
+                <div class="col-xl-2"></div>
+
+                <div class="col-xl-8">
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+
+                            <h3 style="font-weight: bold; text-align: center; color: #0a53be">Billing-Details</h3>
+                            <hr>
+
+                            <div class="tab-content pt-2 ">
+
+                                <div class=" text-dark" style="font-weight: bold;">
+
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label ">First Name</div>
+{#                                            {{ request.user }}#}
+
+                                            <div class="col-lg-9 col-md-8">{{ request.user.first_name }}</div>
+                                        </div><br>
+
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Last Name</div>
+                                            <div class="col-lg-9 col-md-8">{{ request.user.last_name }}</div>
+                                        </div><br>
+
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Email</div>
+                                            <div class="col-lg-9 col-md-8">{{ request.user.email }}</div>
+                                        </div><br>
+
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Gender</div>
+                                            <div class="col-lg-9 col-md-8">{{ request.user.usercreate.gender }}</div>
+                                        </div>
+                                        </div><br>
+                                <form method="post">
+                                    {% csrf_token %}
+
+                                    {{ form.address | as_crispy_field }}
+                                    {{ form.pincode | as_crispy_field }}
+                                    {{ form.city | as_crispy_field }}
+                                    {{ form.state | as_crispy_field }}
+
+
+                                    <div class="text-center mt-2">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form><!-- End Profile Edit Form -->
+                            </div>
+                        </div><!-- End Bordered Tabs -->
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+
+
+{% endblock %}
+

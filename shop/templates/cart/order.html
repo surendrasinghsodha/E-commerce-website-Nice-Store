@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block css_external %}
+    <link href="{% static 'assets/css/thankyou.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <main id="main" class="main">
+
+        <div class=content>
+            <div class="wrapper-1">
+                <div class="wrapper-2">
+                    <h1>Thank you !!</h1>
+
+                    <p>Your order has been collected </p><br>
+                    <a class="go-home" href="{% url 'shop:product_view' %}">
+                        go home
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+    </main>
+
+
+{% endblock %}
+

@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+    <main id="main" class="main">
+
+        <section class="ftco-section bg-light ">
+            <div class="card style="  >
+                <div class="row " style="margin-left: 120px">
+                    <div class="col-md-8 col-lg-10 order-md-last">
+                        <div class="row">
+
+
+                            {% for i in products %}
+                                <div class="col-sm-6 col-md-8 col-lg-4 ftco-animate" >
+                                    <div class="product card mt-4"  >
+
+                                        <a href="{% url 'shop:product_detail' pk=i.pk %}" class="img-prod mt-4">
+                                            <img class="img-fluid" src="{{ i.product_image.url }}"
+                                                 alt="Colorlib Template"
+                                                 style="width:180px; height:200px; margin-left:20px">
+
+                                            <div class="overlay"></div>
+                                        </a>
+                                        <div class="text py-3 px-5" style="text-align: center">
+                                            <div class="price badge border-dark border-1 text-dark"
+                                                 style="font-size:large">
+{#                                                here we use (get_       _display) to use  first capital in model of product#}
+                                                <p> {{ i.get_product_collection_display }}-{{ i.product_category }}</p>
+                                                <p>$ : {{ i.product_price }}</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

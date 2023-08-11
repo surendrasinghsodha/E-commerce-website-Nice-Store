@@ -1,0 +1,121 @@
+{% extends 'index.html' %}
+{% block content %}
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+
+            <h1 style="text-align : center; font-family: KacstDigital;"> Your Cart !! </h1>
+
+            {% for message in messages %}
+                <p style="font-weight: bold; text-align: center">{{ message }}</p>
+            {% endfor %}
+
+            <form method="post">
+                {% csrf_token %}
+                {{ cart_formset.management_form }}
+
+                {% for form in cart_formset %}
+                    {#____FORM_SET--this is require else id required error occur___#}
+                    {% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+                    <div class="card">
+                        <div class="card-body" style=" margin-left:20px;">
+                            <div class="row g-0">
+                                <div class="row">
+                                    <div class="col mt-3">
+                                        <img src="{{ form.instance.product.product_image.url }}"
+                                             style="width:100px; height:100px;"
+                                             alt="Image_loading">
+                                    </div>
+                                    <div class="col mt-4">
+                                        <label>Product Quantity:</label>
+                                        {{ form.product_qty }}
+
+
+                                    </div>
+
+                                    {#                                    <div>#}
+                                    {#                                        <input type="hidden" id="id_cart_formset-0-unit_price" value="10">#}
+                                    {#                                    </div>#}
+                                    <div class="col mt-4">
+                                        <p>Total Price: <span id="totalPrice">{{ form.total_price }}</span></p>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+                <div class="card w-50 " style="margin-left: 250px">
+                    <div class="row justify-content-center">
+                        <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
+                            <div class="cart-total mb-3">
+                                <h3 style="text-align : center; font-family: KacstDigital; color: black"> Cart Totals
+                                    !! </h3>
+                                <hr>
+                                <p class="d-flex total-price">
+                                <h5><span>Total</span></h5>
+                                <span>{{ net_price }}</span>
+                                </p>
+
+                                <input type="submit" class="btn btn-primary" value="Place order">
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+    </main>
+
+{% endblock %}
+
+<!--     Cart-FORMSET-for total_price     -->
+{% block js %}
+    <script>
+
+  $(document).ready(function () {
+    $('*[id^="id_cart_formset-"][id$="-product_qty"]').each(function () {
+        var $product = $(this);
+
+        var totalId = $product.attr('id').replace('-product_qty', '-total_price');
+        var $totalPriceInput = $('#' + totalId); // Cache total price input field
+
+        var initialUnitPrice = parseFloat($totalPriceInput.val()) / parseInt($product.val());
+
+        // Function to update total price
+        function updateTotalPrice(productQty) {
+            var calculatedTotal = productQty * initialUnitPrice;
+            $totalPriceInput.val(calculatedTotal.toFixed(2));
+
+        }
+
+        // Initialize with the initial product quantity
+        updateTotalPrice(parseInt($product.val()));
+
+        // Event handler for product quantity change
+        $product.on('input', function () {
+            var newProductQty = parseInt($(this).val());
+
+            // If the new product quantity is valid and greater than or equal to 0
+            if (!isNaN(newProductQty) && newProductQty >= 0) {
+                updateTotalPrice(newProductQty);
+                console.log('Product Quantity Changed');
+            }
+        });
+    });
+});
+
+</script>
+{% endblock %}
+
+
+

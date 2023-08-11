@@ -1,0 +1,30 @@
+{% extends 'seller_index_.html' %}
+{% load render_table from django_tables2 %}
+{% load django_tables2 %}
+
+{% block content %}
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+
+
+        </div>
+
+
+        <div class="card">
+            <div class="card-header d-flex align-items-center bg-light justify-content-between">
+                <h4 ><span class="badge border-dark border-1 text-dark">Category</span></h4>
+                <div class="card-header-control ">
+                    <a class="btn" href="{% url 'category_create' %}"> <span class="badge bg-dark">ADD-CATEGORY</span></a>
+
+                </div>
+            </div>
+            <div class="card-body">
+                {% render_table table %}
+
+
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
